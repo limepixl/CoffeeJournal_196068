@@ -15,6 +15,9 @@ import android.widget.RadioGroup
 import android.widget.RatingBar
 import androidx.core.view.children
 import androidx.core.widget.doAfterTextChanged
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import mk.ukim.finki.coffeejournal.R
 import mk.ukim.finki.coffeejournal.enums.BrewMethod
 import mk.ukim.finki.coffeejournal.repository.JournalEntryRepository
@@ -30,6 +33,7 @@ class AddJournalEntryFragment : Fragment() {
     private lateinit var btnPickDate: Button
     private lateinit var ratingBar: RatingBar
     private lateinit var etNotes: EditText
+    private lateinit var btnSubmit: Button
 
     private lateinit var journalEntryRepository: JournalEntryRepository
 
@@ -41,6 +45,7 @@ class AddJournalEntryFragment : Fragment() {
         journalEntryRepository = journalViewModel.journalEntryRepository
     }
 
+    @OptIn(DelicateCoroutinesApi::class)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
@@ -93,6 +98,14 @@ class AddJournalEntryFragment : Fragment() {
         etNotes = view.findViewById(R.id.et_notes)
         etNotes.doAfterTextChanged {
             journalViewModel.setNotes(it.toString())
+        }
+
+        btnSubmit = view.findViewById(R.id.btn_submit)
+        btnSubmit.setOnClickListener {
+            GlobalScope.launch {
+                journalEntryRepository.insert(journalViewModel.getJournalEntry())
+            }
+            this.activity?.finish()
         }
 
         return view
