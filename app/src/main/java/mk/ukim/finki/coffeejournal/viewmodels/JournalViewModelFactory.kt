@@ -9,7 +9,9 @@ import mk.ukim.finki.coffeejournal.room.database.AppDatabase
 
 class JournalViewModelFactory(private val context: Context) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return modelClass.getConstructor(JournalEntryRepository::class.java).newInstance(
+        return modelClass.getConstructor(
+            JournalEntryRepository::class.java
+        ).newInstance(
             JournalEntryRepository(
                 RoomDataSource(AppDatabase.getDatabase(context).journalEntryDao())
             )
