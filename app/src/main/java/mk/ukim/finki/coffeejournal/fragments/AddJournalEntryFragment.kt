@@ -17,6 +17,7 @@ import androidx.core.view.children
 import androidx.core.widget.doAfterTextChanged
 import mk.ukim.finki.coffeejournal.R
 import mk.ukim.finki.coffeejournal.enums.BrewMethod
+import mk.ukim.finki.coffeejournal.repository.JournalEntryRepository
 import mk.ukim.finki.coffeejournal.viewmodels.JournalViewModel
 import mk.ukim.finki.coffeejournal.viewmodels.JournalViewModelFactory
 import java.util.*
@@ -30,10 +31,14 @@ class AddJournalEntryFragment : Fragment() {
     private lateinit var ratingBar: RatingBar
     private lateinit var etNotes: EditText
 
+    private lateinit var journalEntryRepository: JournalEntryRepository
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        journalViewModel = JournalViewModelFactory(requireContext())
-                .create(JournalViewModel::class.java)
+        journalViewModel =
+            JournalViewModelFactory(requireContext()).create(JournalViewModel::class.java)
+
+        journalEntryRepository = journalViewModel.journalEntryRepository
     }
 
     override fun onCreateView(
@@ -46,6 +51,7 @@ class AddJournalEntryFragment : Fragment() {
         datePicker.setOnDateChangedListener { dpView, year, monthOfYear, dayOfMonth ->
             val calendar: Calendar = Calendar.getInstance()
             calendar.set(year, monthOfYear, dayOfMonth)
+
             journalViewModel.setDate(calendar.time)
             dpView.visibility = GONE
 
