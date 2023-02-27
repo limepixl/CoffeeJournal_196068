@@ -1,13 +1,8 @@
 package mk.ukim.finki.coffeejournal.viewmodels
 
 import androidx.lifecycle.ViewModel
+import mk.ukim.finki.coffeejournal.enums.BrewMethod
 import java.util.Date
-
-enum class BrewMethod {
-    ESPRESSO,
-    MOKA_POT,
-    INSTANT_COFFEE
-}
 
 @Suppress("unused")
 class JournalViewModel : ViewModel() {
