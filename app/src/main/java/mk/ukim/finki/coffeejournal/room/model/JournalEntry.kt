@@ -8,18 +8,18 @@ import java.util.*
 
 @Entity("journal_entry")
 data class JournalEntry(
-    @PrimaryKey
-    val id: Int,
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = 0,
 
     @ColumnInfo(name = "date")
-    val date: Date,
+    var date: Long = Date().time,
 
     @ColumnInfo(name = "brew_method")
-    val brewMethod: BrewMethod,
+    var brewMethod: BrewMethod = BrewMethod.ESPRESSO,
 
     @ColumnInfo(name = "rating")
-    val rating: Int,
+    var rating: Int = 0,
 
     @ColumnInfo(name = "notes")
-    val notes: String?
+    var notes: String? = null
 )
