@@ -9,4 +9,14 @@ class JournalEntryRepository(
     suspend fun getAll(): List<JournalEntry> {
         return localDataSource.getAll()
     }
+
+    suspend fun insert(journalEntry: JournalEntry) {
+        localDataSource.insert(journalEntry)
+    }
+
+    suspend fun insertAll(journalEntries: List<JournalEntry>) {
+        for(entry in journalEntries) {
+            localDataSource.insert(entry)
+        }
+    }
 }
