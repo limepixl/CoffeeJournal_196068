@@ -17,7 +17,7 @@ import androidx.core.view.children
 import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.ViewModelProvider
 import mk.ukim.finki.coffeejournal.R
-import mk.ukim.finki.coffeejournal.viewmodels.BrewMethod
+import mk.ukim.finki.coffeejournal.enums.BrewMethod
 import mk.ukim.finki.coffeejournal.viewmodels.JournalViewModel
 import java.util.*
 import kotlin.math.floor
