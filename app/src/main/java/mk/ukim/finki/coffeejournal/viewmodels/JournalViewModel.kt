@@ -56,4 +56,8 @@ class JournalViewModel(val journalEntryRepository: JournalEntryRepository) : Vie
     fun getNotes() : String? {
         return journalEntry.notes
     }
+
+    fun getJournalEntry(): JournalEntry {
+        return journalEntry
+    }
 }
