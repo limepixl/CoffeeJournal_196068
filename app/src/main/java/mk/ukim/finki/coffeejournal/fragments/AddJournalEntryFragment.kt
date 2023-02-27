@@ -15,10 +15,10 @@ import android.widget.RadioGroup
 import android.widget.RatingBar
 import androidx.core.view.children
 import androidx.core.widget.doAfterTextChanged
-import androidx.lifecycle.ViewModelProvider
 import mk.ukim.finki.coffeejournal.R
 import mk.ukim.finki.coffeejournal.enums.BrewMethod
 import mk.ukim.finki.coffeejournal.viewmodels.JournalViewModel
+import mk.ukim.finki.coffeejournal.viewmodels.JournalViewModelFactory
 import java.util.*
 import kotlin.math.floor
 
@@ -32,7 +32,8 @@ class AddJournalEntryFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        journalViewModel = ViewModelProvider(this)[JournalViewModel::class.java]
+        journalViewModel = JournalViewModelFactory(requireContext())
+                .create(JournalViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -68,15 +69,10 @@ class AddJournalEntryFragment : Fragment() {
         radioGroup = view.findViewById(R.id.rg_methods)
         for (value in BrewMethod.values()) {
             val rb = RadioButton(context)
-            rb.text = value.toString()
-                .replace('_', ' ')
-                .lowercase()
-                .replaceFirstChar {
-                    if (it.isLowerCase())
-                        it.titlecase(Locale.ROOT)
-                    else
-                        it.toString()
-                }
+            rb.text = value.toString().replace('_', ' ').lowercase().replaceFirstChar {
+                if (it.isLowerCase()) it.titlecase(Locale.ROOT)
+                else it.toString()
+            }
             rb.id = value.ordinal
             radioGroup.addView(rb)
         }
