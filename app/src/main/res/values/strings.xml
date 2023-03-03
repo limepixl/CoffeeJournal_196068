@@ -3,4 +3,6 @@
     <string name="btn_pick_date">Pick Date</string>
     <string name="et_notes_hint">Some thoughts about today\'s coffee…</string>
     <string name="submit_button_label">Submit</string>
+    <string name="camera_button_label">Take a photo</string>
+    <string name="photo_of_your_coffee">Photo of your coffee!</string>
 </resources>

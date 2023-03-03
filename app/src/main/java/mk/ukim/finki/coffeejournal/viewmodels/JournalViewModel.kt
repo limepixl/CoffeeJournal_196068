@@ -60,4 +60,12 @@ class JournalViewModel(val journalEntryRepository: JournalEntryRepository) : Vie
     fun getJournalEntry(): JournalEntry {
         return journalEntry
     }
+
+    fun setPhoto(byteArray: ByteArray) {
+        journalEntry.photo = byteArray
+    }
+
+    fun getPhoto() : ByteArray? {
+        return journalEntry.photo
+    }
 }
