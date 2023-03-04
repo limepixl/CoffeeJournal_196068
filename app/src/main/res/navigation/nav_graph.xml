@@ -12,12 +12,12 @@
         tools:layout="@layout/fragment_add_journal_entry" />
     <fragment
         android:id="@+id/viewJournalEntriesFragment"
-        android:name="mk.ukim.finki.coffeejournal.ViewJournalEntriesFragment"
+        android:name="mk.ukim.finki.coffeejournal.fragments.ViewJournalEntriesFragment"
         android:label="View your Journal Entries"
         tools:layout="@layout/fragment_view_journal_entries" />
     <fragment
         android:id="@+id/handbookFragment"
-        android:name="mk.ukim.finki.coffeejournal.HandbookFragment"
+        android:name="mk.ukim.finki.coffeejournal.fragments.HandbookFragment"
         android:label="Coffee Handbook"
         tools:layout="@layout/fragment_help" />
 </navigation>
