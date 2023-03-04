@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="@string/add_entry_nav_label"
+        android:id="@+id/addJournalEntryFragment"
+        android:icon="@drawable/ic_add_journal_entry"
+        />
+    <item android:title="@string/view_journal_nav_label"
+        android:id="@+id/viewJournalEntriesFragment"
+        android:icon="@drawable/ic_view_journal_entries"
+        />
+    <item android:title="@string/help_nav_label"
+        android:id="@+id/handbookFragment"
+        android:icon="@drawable/ic_help"
+        />
+</menu>

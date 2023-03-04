@@ -1,24 +1,36 @@
 package mk.ukim.finki.coffeejournal
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentContainerView
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var btnJournal: Button
-    private lateinit var btnHelp: Button
+    private lateinit var bottomNavigationView: BottomNavigationView
+    private lateinit var fragmentContainerView: FragmentContainerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        btnJournal = findViewById(R.id.btn_journal)
-        btnHelp = findViewById(R.id.btn_help)
+        bottomNavigationView = findViewById(R.id.bottom_nav_view)
+        fragmentContainerView = findViewById(R.id.fragmentContainerView)
 
-        btnJournal.setOnClickListener {
-            val intent = Intent(this, JournalActivity::class.java)
-            startActivity(intent)
-        }
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
+        val navController = navHostFragment.navController
+
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.addJournalEntryFragment, R.id.viewJournalEntriesFragment, R.id.handbookFragment
+            )
+        )
+        setupActionBarWithNavController(navController, appBarConfiguration)
+
+        bottomNavigationView.setupWithNavController(navController)
     }
 }

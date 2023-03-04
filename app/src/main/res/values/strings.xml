@@ -5,4 +5,7 @@
     <string name="submit_button_label">Submit</string>
     <string name="camera_button_label">Take a photo</string>
     <string name="photo_of_your_coffee">Photo of your coffee!</string>
+    <string name="add_entry_nav_label">Add Entry</string>
+    <string name="view_journal_nav_label">View Journal</string>
+    <string name="help_nav_label">Coffee Handbook</string>
 </resources>

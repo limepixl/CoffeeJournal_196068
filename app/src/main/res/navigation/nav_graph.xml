@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/addJournalEntryFragment">
+
+    <fragment
+        android:id="@+id/addJournalEntryFragment"
+        android:name="mk.ukim.finki.coffeejournal.fragments.AddJournalEntryFragment"
+        android:label="Add Journal Entry"
+        tools:layout="@layout/fragment_add_journal_entry" />
+    <fragment
+        android:id="@+id/viewJournalEntriesFragment"
+        android:name="mk.ukim.finki.coffeejournal.ViewJournalEntriesFragment"
+        android:label="View your Journal Entries"
+        tools:layout="@layout/fragment_view_journal_entries" />
+    <fragment
+        android:id="@+id/handbookFragment"
+        android:name="mk.ukim.finki.coffeejournal.HandbookFragment"
+        android:label="Coffee Handbook"
+        tools:layout="@layout/fragment_help" />
+</navigation>
