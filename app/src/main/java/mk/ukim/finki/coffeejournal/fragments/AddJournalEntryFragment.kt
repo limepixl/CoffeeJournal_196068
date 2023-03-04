@@ -4,25 +4,17 @@ import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.provider.MediaStore
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.DatePicker
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.RadioButton
-import android.widget.RadioGroup
-import android.widget.RatingBar
+import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.view.children
 import androidx.core.widget.doAfterTextChanged
+import androidx.fragment.app.Fragment
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -35,9 +27,9 @@ import java.io.ByteArrayOutputStream
 import java.util.*
 import kotlin.math.floor
 
-class AddJournalEntryFragment : Fragment() {
+class AddJournalEntryFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private lateinit var journalViewModel: JournalViewModel
-    private lateinit var radioGroup: RadioGroup
+    private lateinit var spinner: Spinner
     private lateinit var datePicker: DatePicker
     private lateinit var btnPickDate: Button
     private lateinit var ratingBar: RatingBar
@@ -88,23 +80,20 @@ class AddJournalEntryFragment : Fragment() {
             }
         }
 
-        radioGroup = view.findViewById(R.id.rg_methods)
-        for (value in BrewMethod.values()) {
-            val rb = RadioButton(context)
-            rb.text = value.toString().replace('_', ' ').lowercase().replaceFirstChar {
+        spinner = view.findViewById(R.id.spinner)
+        spinner.onItemSelectedListener = this
+
+        val brewMethods: List<String> = BrewMethod.values().map { brewMethod ->
+            brewMethod.toString().replace('_', ' ').lowercase().replaceFirstChar {
                 if (it.isLowerCase()) it.titlecase(Locale.ROOT)
                 else it.toString()
             }
-            rb.id = value.ordinal
-            radioGroup.addView(rb)
         }
-        radioGroup.setOnCheckedChangeListener { _, checkedId ->
-            if (checkedId > 0) {
-                val index = radioGroup.children.first().id
-                journalViewModel.setBrewMethod(BrewMethod.values()[index])
-            }
-        }
-        radioGroup.check(journalViewModel.getBrewMethod().ordinal + 1)
+        val adapter: ArrayAdapter<String> = ArrayAdapter(
+            requireContext(), android.R.layout.simple_spinner_dropdown_item, brewMethods
+        )
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner.adapter = adapter
 
         etNotes = view.findViewById(R.id.et_notes)
         etNotes.doAfterTextChanged {
@@ -132,10 +121,10 @@ class AddJournalEntryFragment : Fragment() {
     private val cameraActivityLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
-        if(result.resultCode == Activity.RESULT_OK) {
+        if (result.resultCode == Activity.RESULT_OK) {
             val data: Intent? = result.data
             val extras: Bundle? = data?.extras
-            if(extras != null) {
+            if (extras != null) {
                 val stream = ByteArrayOutputStream()
                 val bitmap: Bitmap? = extras.getParcelable("data")
                 bitmap?.compress(Bitmap.CompressFormat.JPEG, 95, stream)
@@ -156,8 +145,15 @@ class AddJournalEntryFragment : Fragment() {
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        radioGroup.removeAllViews()
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        var selectedItemString = parent?.getItemAtPosition(position) as String
+        selectedItemString = selectedItemString.replace(' ', '_').uppercase()
+
+        val selectedItem = BrewMethod.valueOf(selectedItemString)
+        journalViewModel.setBrewMethod(selectedItem)
+    }
+
+    override fun onNothingSelected(parent: AdapterView<*>?) {
+
     }
 }
