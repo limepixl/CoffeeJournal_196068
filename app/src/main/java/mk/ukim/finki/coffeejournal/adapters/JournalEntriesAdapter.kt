@@ -12,17 +12,20 @@ import androidx.recyclerview.widget.RecyclerView
 import mk.ukim.finki.coffeejournal.R
 import mk.ukim.finki.coffeejournal.room.model.JournalEntry
 import java.sql.Date
+import java.util.*
 
 class JournalEntriesAdapter(private val dataSet: List<JournalEntry> = ArrayList()) :
     RecyclerView.Adapter<JournalEntriesAdapter.ViewHolder>() {
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val tvDate: TextView
+        val tvBrewMethod: TextView
         val tvNotes: TextView
         val ivPhoto: ImageView
         val ratingBar: RatingBar
 
         init {
             tvDate = view.findViewById(R.id.tvDate)
+            tvBrewMethod = view.findViewById(R.id.tvBrewMethod)
             tvNotes = view.findViewById(R.id.tvNotes)
             ivPhoto = view.findViewById(R.id.ivPhoto)
             ratingBar = view.findViewById(R.id.ratingBar)
@@ -45,15 +48,20 @@ class JournalEntriesAdapter(private val dataSet: List<JournalEntry> = ArrayList(
         val data = dataSet[position]
 
         holder.tvDate.text = "Date: " + Date(data.date).toString()
+        holder.tvBrewMethod.text = data.brewMethod.toString()
+            .replace('_', ' ').lowercase()
+            .replaceFirstChar {
+                if (it.isLowerCase()) it.titlecase(Locale.ROOT)
+                else it.toString()
+            }
         holder.ratingBar.rating = data.rating.toFloat()
 
-        if(data.notes != null && data.notes != "") {
+        if (data.notes != null && data.notes != "") {
             holder.tvNotes.text = "Notes: " + data.notes
             holder.tvNotes.visibility = View.VISIBLE
         }
 
-        if(data.photo != null)
-        {
+        if (data.photo != null) {
             val bitmap = BitmapFactory.decodeByteArray(data.photo, 0, data.photo!!.size)
             holder.ivPhoto.setImageBitmap(bitmap)
             holder.ivPhoto.visibility = View.VISIBLE
