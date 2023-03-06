@@ -13,6 +13,7 @@ import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -87,11 +88,14 @@ class AddJournalEntryFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
         btnSubmit = view.findViewById(R.id.btn_submit)
         btnSubmit.setOnClickListener {
-            journalViewModel.setDate(Date())
-            GlobalScope.launch {
-                journalEntryRepository.insert(journalViewModel.getJournalEntry())
+            if (!journalViewModel.getNotes().isNullOrEmpty() && journalViewModel.getRating() > 0) {
+                journalViewModel.setDate(Date())
+                GlobalScope.launch {
+                    journalEntryRepository.insert(journalViewModel.getJournalEntry())
+                }
+
+                findNavController().navigate(R.id.action_addJournalEntryFragment_to_viewJournalEntriesFragment)
             }
-            this.activity?.finish()
         }
 
         return view
