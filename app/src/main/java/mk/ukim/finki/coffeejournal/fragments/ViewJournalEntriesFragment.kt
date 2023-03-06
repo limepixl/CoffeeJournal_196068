@@ -40,4 +40,9 @@ class ViewJournalEntriesFragment : Fragment() {
 
         return view
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        journalEntries.removeObservers(viewLifecycleOwner)
+    }
 }
