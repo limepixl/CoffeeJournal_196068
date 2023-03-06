@@ -8,8 +8,6 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
@@ -30,8 +28,6 @@ import kotlin.math.floor
 class AddJournalEntryFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private lateinit var journalViewModel: JournalViewModel
     private lateinit var spinner: Spinner
-    private lateinit var datePicker: DatePicker
-    private lateinit var btnPickDate: Button
     private lateinit var ratingBar: RatingBar
     private lateinit var etNotes: EditText
     private lateinit var btnSubmit: Button
@@ -54,24 +50,6 @@ class AddJournalEntryFragment : Fragment(), AdapterView.OnItemSelectedListener {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_add_journal_entry, container, false)
-
-        datePicker = view.findViewById(R.id.date_picker)
-        datePicker.setOnDateChangedListener { dpView, year, monthOfYear, dayOfMonth ->
-            val calendar: Calendar = Calendar.getInstance()
-            calendar.set(year, monthOfYear, dayOfMonth)
-
-            journalViewModel.setDate(calendar.time)
-            dpView.visibility = GONE
-
-            btnPickDate.visibility = VISIBLE
-            btnPickDate.text = journalViewModel.getDate().toString()
-        }
-
-        btnPickDate = view.findViewById(R.id.btn_pick_date)
-        btnPickDate.setOnClickListener {
-            datePicker.visibility = VISIBLE
-            btnPickDate.visibility = GONE
-        }
 
         ratingBar = view.findViewById(R.id.rating_bar)
         ratingBar.setOnRatingBarChangeListener { _, rating, fromUser ->
@@ -109,6 +87,7 @@ class AddJournalEntryFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
         btnSubmit = view.findViewById(R.id.btn_submit)
         btnSubmit.setOnClickListener {
+            journalViewModel.setDate(Date())
             GlobalScope.launch {
                 journalEntryRepository.insert(journalViewModel.getJournalEntry())
             }
