@@ -16,9 +16,12 @@ class JournalViewModel(val journalEntryRepository: JournalEntryRepository) : Vie
     private val journalEntriesLiveData = MutableLiveData<List<JournalEntry>>()
     private val journalEntry: JournalEntry = JournalEntry()
 
-    fun getJournalEntriesLiveData(): LiveData<List<JournalEntry>> = journalEntriesLiveData
+    fun getJournalEntriesLiveData(): LiveData<List<JournalEntry>> {
+        listAll()
+        return journalEntriesLiveData
+    }
 
-    fun listAll() {
+    private fun listAll() {
         viewModelScope.launch(Dispatchers.IO) {
             val journalEntries = journalEntryRepository.getAll()
             journalEntriesLiveData.postValue(journalEntries)
