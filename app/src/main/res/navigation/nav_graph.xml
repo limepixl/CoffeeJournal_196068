@@ -3,8 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/addJournalEntryFragment">
+    app:startDestination="@id/homeFragment">
 
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="mk.ukim.finki.coffeejournal.fragments.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/addJournalEntryFragment"
         android:name="mk.ukim.finki.coffeejournal.fragments.AddJournalEntryFragment"
@@ -20,4 +25,5 @@
         android:name="mk.ukim.finki.coffeejournal.fragments.HandbookFragment"
         android:label="Coffee Handbook"
         tools:layout="@layout/fragment_help" />
+
 </navigation>

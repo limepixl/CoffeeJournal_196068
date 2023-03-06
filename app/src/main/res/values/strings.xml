@@ -11,4 +11,5 @@
     <string name="welcome_text">What was today\'s brew like?</string>
     <string name="spinner_speakable_text">Coffee Brew Method selection</string>
     <string name="rating_bar_speakable_text">Coffee Rating Bar</string>
+    <string name="home_nav_label">Home</string>
 </resources>
