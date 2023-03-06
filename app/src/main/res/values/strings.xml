@@ -12,4 +12,7 @@
     <string name="spinner_speakable_text">Coffee Brew Method selection</string>
     <string name="rating_bar_speakable_text">Coffee Rating Bar</string>
     <string name="home_nav_label">Home</string>
+    <string name="home_title_text">Coffee Journal</string>
+    <string name="home_background">Home background image depicting coffee beans</string>
+    <string name="home_intro_text">Log your brews…\n\t\tReflect on past entries…\n\t\t\t\tFind your perfect cup…</string>
 </resources>
