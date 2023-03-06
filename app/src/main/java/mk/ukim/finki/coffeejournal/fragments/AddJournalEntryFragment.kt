@@ -1,6 +1,7 @@
 package mk.ukim.finki.coffeejournal.fragments
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.graphics.Bitmap
@@ -95,6 +96,12 @@ class AddJournalEntryFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 }
 
                 findNavController().navigate(R.id.action_addJournalEntryFragment_to_viewJournalEntriesFragment)
+            } else {
+                AlertDialog.Builder(requireContext())
+                    .setTitle("Some required fields are empty!")
+                    .setMessage("Make sure that you give each coffee at least a rating and write some notes...")
+                    .setPositiveButton("Will do!", null)
+                    .show()
             }
         }
 
