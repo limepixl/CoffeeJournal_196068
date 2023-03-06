@@ -26,11 +26,13 @@ class MainActivity : AppCompatActivity() {
 
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.addJournalEntryFragment, R.id.viewJournalEntriesFragment, R.id.handbookFragment
+                R.id.homeFragment,
+                R.id.addJournalEntryFragment,
+                R.id.viewJournalEntriesFragment,
+                R.id.handbookFragment
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
-
         bottomNavigationView.setupWithNavController(navController)
     }
 }

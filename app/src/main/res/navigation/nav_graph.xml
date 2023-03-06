@@ -14,7 +14,11 @@
         android:id="@+id/addJournalEntryFragment"
         android:name="mk.ukim.finki.coffeejournal.fragments.AddJournalEntryFragment"
         android:label="Add Journal Entry"
-        tools:layout="@layout/fragment_add_journal_entry" />
+        tools:layout="@layout/fragment_add_journal_entry" >
+        <action
+            android:id="@+id/action_addJournalEntryFragment_to_viewJournalEntriesFragment"
+            app:destination="@id/viewJournalEntriesFragment" />
+    </fragment>
     <fragment
         android:id="@+id/viewJournalEntriesFragment"
         android:name="mk.ukim.finki.coffeejournal.fragments.ViewJournalEntriesFragment"
