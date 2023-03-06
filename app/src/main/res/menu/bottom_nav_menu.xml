@@ -8,16 +8,16 @@
     <item android:title="@string/add_entry_nav_label"
         android:id="@+id/addJournalEntryFragment"
         android:icon="@drawable/ic_add_journal_entry"
-        android:menuCategory="secondary"
+        android:menuCategory="alternative"
         />
     <item android:title="@string/view_journal_nav_label"
         android:id="@+id/viewJournalEntriesFragment"
         android:icon="@drawable/ic_view_journal_entries"
-        android:menuCategory="secondary"
+        android:menuCategory="alternative"
         />
     <item android:title="@string/help_nav_label"
         android:id="@+id/handbookFragment"
         android:icon="@drawable/ic_help"
-        android:menuCategory="secondary"
+        android:menuCategory="alternative"
         />
 </menu>
