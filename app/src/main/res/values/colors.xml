@@ -8,4 +8,11 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="bgBottomNavigation">#947342</color>
+    <color name="brown_500">#7D511C</color>
+    <color name="brown_400">#956939</color>
+    <color name="brown_300">#ad8356</color>
+    <color name="brown_200">#cea47d</color>
+    <color name="brown_100">#ecc7a1</color>
+    <color name="lime_800">#8FA333</color>
+    <color name="lime_200">#d9f2a4</color>
 </resources>
