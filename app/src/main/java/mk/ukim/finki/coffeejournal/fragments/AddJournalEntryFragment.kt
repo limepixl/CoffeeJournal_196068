@@ -1,17 +1,21 @@
 package mk.ukim.finki.coffeejournal.fragments
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.os.Environment
 import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.FileProvider
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -24,6 +28,9 @@ import mk.ukim.finki.coffeejournal.repository.JournalEntryRepository
 import mk.ukim.finki.coffeejournal.viewmodels.JournalViewModel
 import mk.ukim.finki.coffeejournal.viewmodels.JournalViewModelFactory
 import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.IOException
+import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.floor
 
@@ -37,6 +44,8 @@ class AddJournalEntryFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private lateinit var ivPhoto: ImageView
 
     private lateinit var journalEntryRepository: JournalEntryRepository
+
+    private lateinit var currentPhotoPath: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -112,26 +121,52 @@ class AddJournalEntryFragment : Fragment(), AdapterView.OnItemSelectedListener {
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
-            val data: Intent? = result.data
-            val extras: Bundle? = data?.extras
-            if (extras != null) {
-                val stream = ByteArrayOutputStream()
-                val bitmap: Bitmap? = extras.getParcelable("data")
-                bitmap?.compress(Bitmap.CompressFormat.JPEG, 95, stream)
-                val photoBytes = stream.toByteArray()
-                journalViewModel.setPhoto(photoBytes)
-
-                ivPhoto.setImageBitmap(bitmap)
-            }
+            val imageFile = File(currentPhotoPath)
+            val fileBytes = imageFile.readBytes()
+            val outStream = ByteArrayOutputStream()
+            val bitmap = BitmapFactory.decodeByteArray(fileBytes, 0, fileBytes.size)
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 95, outStream)
+            journalViewModel.setPhotoPath(currentPhotoPath)
+            ivPhoto.setImageBitmap(bitmap)
         }
     }
 
     private fun dispatchTakePictureIntent() {
         val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+
+        val photoFile : File? = try {
+            createImageFile()
+        } catch (ex: IOException) {
+            null
+        }
+
+        photoFile?.also {
+            val photoURI = FileProvider.getUriForFile(
+                requireContext(),
+                "mk.ukim.finki.coffeejournal.fileprovider",
+                photoFile
+            )
+            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
+        }
+
         try {
             cameraActivityLauncher.launch(takePictureIntent)
         } catch (e: ActivityNotFoundException) {
             // ERROR
+        }
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    private fun createImageFile() : File {
+        val timestamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+
+        val storageDir = requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        return File.createTempFile(
+            "JPEG_${timestamp}_",
+            ".jpg",
+            storageDir
+        ).apply {
+            currentPhotoPath = absolutePath
         }
     }
 
