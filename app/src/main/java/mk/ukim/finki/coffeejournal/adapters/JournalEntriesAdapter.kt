@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import mk.ukim.finki.coffeejournal.R
 import mk.ukim.finki.coffeejournal.room.model.JournalEntry
+import java.io.File
 import java.sql.Date
 import java.util.*
 
@@ -61,10 +62,14 @@ class JournalEntriesAdapter(private val dataSet: List<JournalEntry> = ArrayList(
             holder.tvNotes.visibility = View.VISIBLE
         }
 
-        if (data.photo != null) {
-            val bitmap = BitmapFactory.decodeByteArray(data.photo, 0, data.photo!!.size)
-            holder.ivPhoto.setImageBitmap(bitmap)
-            holder.ivPhoto.visibility = View.VISIBLE
+        if (data.photoPath != null) {
+            val photoFile = data.photoPath?.let { File(it) }
+            if(photoFile != null) {
+                val bytes = photoFile.readBytes()
+                val bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+                holder.ivPhoto.setImageBitmap(bitmap)
+                holder.ivPhoto.visibility = View.VISIBLE
+            }
         }
 
     }

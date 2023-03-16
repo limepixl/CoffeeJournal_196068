@@ -24,7 +24,7 @@ data class JournalEntry(
     var notes: String? = null,
 
     @ColumnInfo(name = "photo")
-    var photo: ByteArray? = null
+    var photoPath: String? = null
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -37,10 +37,10 @@ data class JournalEntry(
         if (brewMethod != other.brewMethod) return false
         if (rating != other.rating) return false
         if (notes != other.notes) return false
-        if (photo != null) {
-            if (other.photo == null) return false
-            if (!photo.contentEquals(other.photo)) return false
-        } else if (other.photo != null) return false
+        if (photoPath != null) {
+            if (other.photoPath == null) return false
+            if (!photoPath.contentEquals(other.photoPath)) return false
+        } else if (other.photoPath != null) return false
 
         return true
     }
@@ -51,7 +51,7 @@ data class JournalEntry(
         result = 31 * result + brewMethod.hashCode()
         result = 31 * result + rating
         result = 31 * result + (notes?.hashCode() ?: 0)
-        result = 31 * result + (photo?.contentHashCode() ?: 0)
+        result = 31 * result + (photoPath?.hashCode() ?: 0)
         return result
     }
 }

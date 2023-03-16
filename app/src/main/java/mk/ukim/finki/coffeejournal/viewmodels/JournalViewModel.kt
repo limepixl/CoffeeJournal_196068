@@ -64,11 +64,11 @@ class JournalViewModel(val journalEntryRepository: JournalEntryRepository) : Vie
         return journalEntry
     }
 
-    fun setPhoto(byteArray: ByteArray) {
-        journalEntry.photo = byteArray
+    fun setPhotoPath(path: String) {
+        journalEntry.photoPath = path
     }
 
-    fun getPhoto() : ByteArray? {
-        return journalEntry.photo
+    fun getPhotoPath() : String? {
+        return journalEntry.photoPath
     }
 }
