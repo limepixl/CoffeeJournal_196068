@@ -71,6 +71,37 @@ class JournalEntriesAdapter(private val dataSet: List<JournalEntry> = ArrayList(
                 holder.ivPhoto.visibility = View.VISIBLE
             }
         }
+    }
+}
 
+class JournalEntriesHeader(private val dataSet: List<JournalEntry> = ArrayList()): RecyclerView.Adapter<JournalEntriesHeader.HeaderViewHolder>() {
+    class HeaderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val tvNumEntries: TextView
+
+        init {
+            tvNumEntries = view.findViewById(R.id.tvNumEntries)
+        }
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HeaderViewHolder {
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.journal_entries_header, parent, false)
+
+        return HeaderViewHolder(view)
+    }
+
+    @SuppressLint("SetTextI18n")
+    override fun onBindViewHolder(holder: HeaderViewHolder, position: Int) {
+        val string: String = when (dataSet.size) {
+            0 -> "No logs yet... Get brewing!"
+            1 -> "You've logged a single cup. Nice!"
+            else -> "You've logged ${dataSet.size} cups of coffee!"
+        }
+
+        holder.tvNumEntries.text = string
+    }
+
+    override fun getItemCount(): Int {
+        return 1
     }
 }
