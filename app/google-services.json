@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "252388747348",
+    "project_id": "coffee-journal-93f0d",
+    "storage_bucket": "coffee-journal-93f0d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:252388747348:android:1b1501f54f195d73c1e5c1",
+        "android_client_info": {
+          "package_name": "mk.ukim.finki.coffeejournal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "252388747348-tbl6rpurfd6ubr4n7qu2ae5helgl0tq9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4NLFypjqHGgBgO_5WU1FUM7bvQXjhBIo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "252388747348-tbl6rpurfd6ubr4n7qu2ae5helgl0tq9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
