@@ -16,4 +16,8 @@
     <string name="home_background">Home background image depicting coffee beans</string>
     <string name="home_intro_text">Log your brews…\n\t\tReflect on past entries…\n\t\t\t\tFind your perfect cup…</string>
     <string name="journal_entries_header">You\'ve logged X cups!</string>
+    <string name="title_notification_reminder">Daily reminder</string>
+    <string name="description_notification_reminder">If you\'ve had a cup of coffee today, why not log it!</string>
+    <string name="reminders_notification_channel_id">45678</string>
+    <string name="reminders_notification_channel_name">Daily Reminder</string>
 </resources>
