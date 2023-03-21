@@ -9,6 +9,8 @@ import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import mk.ukim.finki.coffeejournal.MainActivity
 import mk.ukim.finki.coffeejournal.R
+import java.text.SimpleDateFormat
+import java.util.*
 
 class AlarmReceiver : BroadcastReceiver() {
 
@@ -26,7 +28,11 @@ class AlarmReceiver : BroadcastReceiver() {
             channelId = context.getString(R.string.reminders_notification_channel_id)
         )
         // Remove this line if you don't want to reschedule the reminder
-        MainActivity.RemindersManager.startReminder(context.applicationContext)
+        // TODO: TEMP
+        val calendar = Calendar.getInstance()
+        calendar.add(Calendar.MINUTE, 1)
+        val timeString = SimpleDateFormat("hh:mm").format(calendar.time)
+        MainActivity.RemindersManager.startReminder(context.applicationContext, timeString)
     }
 }
 

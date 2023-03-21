@@ -4,6 +4,8 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import mk.ukim.finki.coffeejournal.MainActivity
+import java.text.SimpleDateFormat
+import java.util.*
 
 class BootReceiver : BroadcastReceiver() {
     /*
@@ -11,7 +13,11 @@ class BootReceiver : BroadcastReceiver() {
     * */
     override fun onReceive(context: Context, intent: Intent) {
         if (intent.action == "android.intent.action.BOOT_COMPLETED") {
-            MainActivity.RemindersManager.startReminder(context)
+            // TODO: TEMP
+            val calendar = Calendar.getInstance()
+            calendar.add(Calendar.MINUTE, 1)
+            val timeString = SimpleDateFormat("hh:mm").format(calendar.time)
+            MainActivity.RemindersManager.startReminder(context, timeString)
         }
     }
 }
