@@ -16,6 +16,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import kotlinx.coroutines.DelicateCoroutinesApi
@@ -47,8 +48,9 @@ class AddJournalEntryFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val journalViewModelFactory = JournalViewModelFactory(requireContext())
         journalViewModel =
-            JournalViewModelFactory(requireContext()).create(JournalViewModel::class.java)
+            ViewModelProvider(this, journalViewModelFactory)[JournalViewModel::class.java]
 
         journalEntryRepository = journalViewModel.journalEntryRepository
     }

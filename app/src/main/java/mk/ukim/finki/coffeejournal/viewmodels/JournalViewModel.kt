@@ -13,7 +13,7 @@ import java.util.*
 
 @Suppress("unused")
 class JournalViewModel(val journalEntryRepository: JournalEntryRepository) : ViewModel() {
-    private val journalEntriesLiveData = MutableLiveData<List<JournalEntry>>()
+    private val journalEntriesLiveData: MutableLiveData<List<JournalEntry>> = MutableLiveData<List<JournalEntry>>()
     private val journalEntry: JournalEntry = JournalEntry()
 
     fun getJournalEntriesLiveData(): LiveData<List<JournalEntry>> {
