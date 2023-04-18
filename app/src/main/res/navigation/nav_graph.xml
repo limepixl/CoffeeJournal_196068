@@ -25,9 +25,9 @@
         android:label="View your Journal Entries"
         tools:layout="@layout/fragment_view_journal_entries" />
     <fragment
-        android:id="@+id/handbookFragment"
-        android:name="mk.ukim.finki.coffeejournal.fragments.HandbookFragment"
-        android:label="Coffee Handbook"
-        tools:layout="@layout/fragment_help" />
+        android:id="@+id/backupFragment"
+        android:name="mk.ukim.finki.coffeejournal.fragments.BackupFragment"
+        android:label="Backup"
+        tools:layout="@layout/fragment_backup" />
 
 </navigation>

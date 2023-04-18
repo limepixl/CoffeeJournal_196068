@@ -16,9 +16,9 @@
         android:icon="@drawable/ic_view_journal_entries"
         android:menuCategory="secondary"
         />
-    <item android:title="@string/help_nav_label"
-        android:id="@+id/handbookFragment"
-        android:icon="@drawable/ic_help"
+    <item android:title="@string/backup_nav_label"
+        android:id="@+id/backupFragment"
+        android:icon="@drawable/ic_backup"
         android:menuCategory="secondary"
         />
 </menu>

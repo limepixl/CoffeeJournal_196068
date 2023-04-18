@@ -7,7 +7,7 @@
     <string name="photo_of_your_coffee">Photo of your coffee!</string>
     <string name="add_entry_nav_label">Add Entry</string>
     <string name="view_journal_nav_label">View Journal</string>
-    <string name="help_nav_label">Coffee Handbook</string>
+    <string name="backup_nav_label">Backup</string>
     <string name="welcome_text">What was today\'s brew like?</string>
     <string name="spinner_speakable_text">Coffee Brew Method selection</string>
     <string name="rating_bar_speakable_text">Coffee Rating Bar</string>
@@ -21,4 +21,7 @@
     <string name="reminders_notification_channel_id">45678</string>
     <string name="reminders_notification_channel_name">Daily Reminder</string>
     <string name="your_web_client_id">889969526816-1hamrlacm3jtus5tnb04svdi5kcrnubm.apps.googleusercontent.com</string>
+    <string name="profile_picture_of_logged_in_user">Profile picture of logged in user</string>
+    <string name="backup_explanation">Back up your journal entries to your Google account, and restore them on any device. Logged in session ends when you switch away from this screen.</string>
+    <string name="btn_oauth2">Sign in with Google</string>
 </resources>

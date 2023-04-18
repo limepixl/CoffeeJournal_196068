@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.homeFragment,
                 R.id.addJournalEntryFragment,
                 R.id.viewJournalEntriesFragment,
-                R.id.handbookFragment
+                R.id.backupFragment
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
