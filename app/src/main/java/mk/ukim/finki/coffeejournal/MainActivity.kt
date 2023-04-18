@@ -55,10 +55,6 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView.setupWithNavController(navController)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-    }
-
     private fun createNotificationsChannels() {
         val requestPermissionLauncher = registerForActivityResult(
             ActivityResultContracts.RequestPermission()
