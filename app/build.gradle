@@ -4,6 +4,20 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        debug {
+            storeFile file('C:\\Users\\limel\\android_keystore\\key_limepixl.jks')
+            storePassword 'ru|bic_rat.io5'
+            keyAlias 'key_limepixl'
+            keyPassword 'ru|bic_rat.io5'
+        }
+        release {
+            storeFile file('C:\\Users\\limel\\android_keystore\\key_limepixl.jks')
+            storePassword 'ru|bic_rat.io5'
+            keyAlias 'key_limepixl'
+            keyPassword 'ru|bic_rat.io5'
+        }
+    }
     namespace 'mk.ukim.finki.coffeejournal'
     compileSdk 33
 
@@ -21,8 +35,12 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            debuggable false
+//            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            debuggable true
         }
     }
     compileOptions {
@@ -58,4 +76,8 @@ dependencies {
 
     implementation "androidx.cardview:cardview:1.0.0"
     implementation 'com.google.android.gms:play-services-auth:20.4.1'
+
+    implementation 'com.github.bumptech.glide:glide:4.14.2'
+    // Skip this if you don't want to use integration libraries or configure Glide.
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.14.2'
 }
